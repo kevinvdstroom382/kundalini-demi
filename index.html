@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kundalini by Demi — Ontwaken Begint Van Binnenuit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:           #FDF8F2;
+      --cream-deep:      #F5EDE0;
+      --pink:            #FBECF5;
+      --pink-mid:        #F2D5E8;
+      --espresso:        #3E2723;
+      --espresso-light:  #5D3A2E;
+      --text:            #2C1810;
+      --text-mid:        #6B4C3B;
+      --text-soft:       #A08272;
+      --white:           #FFFCF8;
+      --border:          rgba(62,39,35,0.10);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Jost', sans-serif;
+      --ease-spring: cubic-bezier(0.32,0.72,0,1);
+      --ease-out:    cubic-bezier(0.16,1,0.3,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 100; pointer-events: none; opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 128px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--pink-mid); border-radius: 2px; }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 36px; }
+    @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+    .eyebrow {
+      display: inline-block; font-family: var(--sans); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-mid);
+      background: var(--pink); border: 1px solid var(--pink-mid); padding: 6px 14px;
+      border-radius: 100px; margin-bottom: 20px;
+    }
+    .eyebrow--light { background: rgba(251,236,245,0.15); border-color: rgba(251,236,245,0.3); color: rgba(253,248,242,0.8); }
+    .eyebrow--cream { background: rgba(253,248,242,0.14); border-color: rgba(253,248,242,0.32); color: rgba(253,248,242,0.82); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+    .reveal-delay-5 { transition-delay: 0.58s; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--sans); font-size: 13px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      padding: 16px 32px; border-radius: 100px; border: none; cursor: pointer;
+      transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring), background 0.3s;
+      will-change: transform;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn--primary { background: var(--espresso); color: var(--cream); box-shadow: 0 4px 24px rgba(62,39,35,0.20); }
+    .btn--primary:hover { background: var(--espresso-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(62,39,35,0.26); }
+    .btn--outline { background: transparent; color: var(--espresso); border: 1.5px solid var(--espresso); }
+    .btn--outline:hover { background: var(--espresso); color: var(--cream); transform: translateY(-2px); }
+    .btn--outline-light { background: transparent; color: var(--cream); border: 1.5px solid rgba(253,248,242,0.5); }
+    .btn--outline-light:hover { background: rgba(253,248,242,0.1); border-color: rgba(253,248,242,0.8); transform: translateY(-2px); }
+    .btn--light { background: var(--cream); color: var(--espresso); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .btn--light:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
+    .btn-arrow { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: transform 0.4s var(--ease-spring); flex-shrink: 0; }
+    .btn:hover .btn-arrow { transform: translate(2px, -2px); }
+
+    /* NAV */
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 90; padding: 24px 0; transition: background 0.5s, backdrop-filter 0.5s, box-shadow 0.5s, padding 0.4s; }
+    #nav.scrolled { background: rgba(253,248,242,0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 1px 0 var(--border); padding: 14px 0; }
+    #nav:not(.scrolled) .nav-logo { color: var(--cream); }
+    #nav:not(.scrolled) .nav-links a { color: rgba(253,248,242,0.72); }
+    #nav:not(.scrolled) .nav-links a:hover { color: var(--cream); }
+    #nav.scrolled .nav-logo { color: var(--espresso); }
+    #nav.scrolled .nav-links a { color: var(--text-mid); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--serif); font-size: 22px; font-weight: 400; letter-spacing: 0.06em; text-decoration: none; transition: color 0.4s; }
+    .nav-logo span { font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: color 0.25s; }
+    .nav-cta { font-size: 12px !important; padding: 11px 24px !important; }
+    @media (max-width: 900px) { .nav-links { display: none; } }
+
+    /* ═══════════════════════════════════════════
+       HERO — VOLLEDIG SCHERMBREED
+    ═══════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    /* Placeholder voor de echte foto */
+    .hero-bg-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(155deg, #c4aca5 0%, #cdb4bc 22%, #b8a2aa 45%, #c5b0ac 68%, #b8a8b2 85%, #c0aaa8 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+      color: rgba(253,248,242,0.5);
+    }
+    .hero-bg-placeholder svg { opacity: 0.38; }
+    .hero-bg-placeholder p { font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; text-align: center; max-width: 300px; line-height: 1.9; }
+    /* Gebruik dit img-element zodra je de foto hebt:
+       <img class="hero-bg-img" src="jouw-foto.jpg" alt="" /> */
+    .hero-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    /* Gradient overlay onderaan voor leesbaarheid */
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(18,7,4,0.82) 0%, rgba(18,7,4,0.50) 35%, rgba(18,7,4,0.15) 65%, transparent 100%);
+    }
+    /* Subtiele donkere rand bovenaan voor nav-leesbaarheid */
+    .hero-overlay-top {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(18,7,4,0.20) 0%, transparent 28%);
+    }
+    .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 0 88px; }
+    .hero-inner { display: flex; flex-direction: column; align-items: flex-start; max-width: 800px; }
+    .hero-headline { font-family: var(--serif); font-size: clamp(40px, 6vw, 86px); font-weight: 300; line-height: 1.0; letter-spacing: -0.015em; color: var(--cream); margin-bottom: 22px; }
+    .hero-headline em { font-style: italic; color: var(--pink-mid); }
+    .hero-sub { font-size: 17px; font-weight: 300; line-height: 1.78; color: rgba(253,248,242,0.75); max-width: 510px; margin-bottom: 44px; }
+    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+    .hero-trust { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .hero-trust-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(253,248,242,0.52); letter-spacing: 0.03em; }
+    .hero-trust-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--pink-mid); opacity: 0.7; }
+    .hero-scroll { position: absolute; bottom: 36px; right: 40px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(253,248,242,0.38); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+    .hero-scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, rgba(253,248,242,0.32)); animation: scrollPulse 2.2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100% { opacity:0.3; transform:scaleY(1); } 50% { opacity:0.8; transform:scaleY(1.15); } }
+    @media (max-width: 768px) {
+      /* Center everything */
+      .hero-inner { max-width: 100%; align-items: center; text-align: center; }
+      /* BIGGER headline, forced to 2 lines */
+      .hero-headline { font-size: clamp(44px, 12vw, 64px); line-height: 1.04; text-align: center; }
+      .hero-sub { font-size: 14px; max-width: 320px; text-align: center; margin-bottom: 32px; }
+      .hero-content { padding: 0 0 52px; }
+      .hero-scroll { display: none; }
+      /* Smaller buttons side by side */
+      .hero-actions { flex-direction: row; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+      .hero-actions .btn { padding: 10px 18px !important; font-size: 11px !important; letter-spacing: 0.06em; gap: 6px; width: auto; }
+      .hero-actions .btn .btn-arrow { width: 20px; height: 20px; }
+      /* Trust items in a single row */
+      .hero-trust { justify-content: center; gap: 0; flex-wrap: nowrap; }
+      .hero-trust-item { font-size: 9.5px; letter-spacing: 0; gap: 4px; padding: 0 8px; border-right: 1px solid rgba(253,248,242,0.2); line-height: 1.3; }
+      .hero-trust-item:last-child { border-right: none; }
+      .hero-trust-dot { display: none; }
+    }
+    @media (max-width: 380px) {
+      .hero-headline { font-size: clamp(38px, 11vw, 52px); }
+      .hero-trust-item { font-size: 8.5px; padding: 0 6px; }
+      .hero-actions .btn { padding: 9px 14px !important; font-size: 10px !important; }
+    }
+
+    /* TRUST STRIP */
+    #trust { background: var(--espresso); padding: 20px 0; }
+    .trust-strip { display: flex; align-items: center; width: 100%; }
+    .trust-item {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      flex: 1;
+      padding: 6px 12px;
+      font-size: 10.5px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(253,248,242,0.58);
+      border-right: 1px solid rgba(253,248,242,0.1);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .trust-item:last-child { border-right: none; }
+    @media (max-width: 900px) {
+      .trust-item { font-size: 9px; letter-spacing: 0.1em; gap: 7px; padding: 6px 8px; }
+      .trust-item svg { display: none; }
+    }
+    @media (max-width: 600px) {
+      .trust-strip { flex-direction: column; }
+      .trust-item { width: 100%; flex: none; border-right: none; border-bottom: 1px solid rgba(253,248,242,0.08); justify-content: flex-start; padding: 10px 0; white-space: normal; }
+      .trust-item:last-child { border-bottom: none; }
+      .trust-item svg { display: inline; }
+    }
+
+    /* SHARED SECTIONS */
+    .section-headline { font-family: var(--serif); font-size: clamp(36px, 4vw, 64px); font-weight: 300; line-height: 1.07; letter-spacing: -0.01em; color: var(--espresso); margin-bottom: 24px; }
+    .section-headline em { font-style: italic; }
+    .section-body { font-size: 15px; font-weight: 300; line-height: 1.88; color: var(--text-mid); margin-bottom: 32px; }
+    .section-center { text-align: center; margin-bottom: 64px; }
+    .section-center .section-headline { max-width: 640px; margin: 0 auto 20px; }
+    .section-center .section-body { max-width: 520px; margin: 0 auto 32px; }
+
+    .pp { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); text-align: center; padding: 20px; }
+    .pp svg { opacity: 0.30; flex-shrink: 0; }
+    .pp span { opacity: 0.48; line-height: 1.75; }
+
+    /* KUNDALINI */
+    #kundalini { padding: 130px 0; background: var(--white); }
+    .kundalini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .kundalini-visual { position: relative; }
+    .kundalini-img { width: 100%; aspect-ratio: 4/5; background: linear-gradient(145deg, var(--pink) 0%, var(--cream-deep) 55%, var(--pink-mid) 100%); border-radius: 200px 200px 24px 24px; overflow: hidden; }
+    .kundalini-quote { position: absolute; top: 40px; left: -28px; background: var(--espresso); color: var(--cream); padding: 20px 24px; border-radius: 16px; font-family: var(--serif); font-size: 14px; font-style: italic; line-height: 1.65; max-width: 200px; box-shadow: 0 8px 32px rgba(62,39,35,0.22); }
+    .kundalini-float-card { position: absolute; bottom: -20px; right: -24px; background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 18px 22px; box-shadow: 0 8px 40px rgba(62,39,35,0.09); min-width: 180px; }
+    .kundalini-float-card p { font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--espresso); line-height: 1; }
+    .kundalini-float-card span { font-size: 11px; color: var(--text-soft); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; display: block; }
+    .benefit-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+    .benefit-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+    .benefit-icon { width: 28px; height: 28px; min-width: 28px; background: var(--pink); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 900px) { #kundalini { background: var(--white); } .kundalini-grid { grid-template-columns: 1fr; gap: 48px; } .kundalini-quote { display: none; } }
+
+    /* DEMI */
+    #demi { padding: 130px 0; background: var(--cream-deep); position: relative; overflow: hidden; }
+    #demi::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, var(--pink) 0%, transparent 70%); opacity: 0.45; pointer-events: none; }
+    .demi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .demi-img { width: 100%; aspect-ratio: 3/4; border-radius: 120px 120px 24px 24px; background: linear-gradient(160deg, var(--pink-mid) 0%, var(--cream) 50%, var(--pink) 100%); overflow: hidden; }
+    .pull-quote { font-family: var(--serif); font-size: clamp(20px, 2.5vw, 32px); font-style: italic; font-weight: 300; line-height: 1.45; color: var(--espresso); border-left: 2px solid var(--pink-mid); padding-left: 28px; margin: 32px 0; }
+    .demi-stats { display: flex; gap: 32px; margin-top: 16px; flex-wrap: wrap; }
+    .demi-stat p { font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--espresso); line-height: 1; }
+    .demi-stat span { font-size: 11px; color: var(--text-soft); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; display: block; }
+    @media (max-width: 900px) { .demi-grid { grid-template-columns: 1fr; } }
+
+    /* TRANSFORMATIES */
+    #transformaties { padding: 130px 0; background: var(--pink); }
+    .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .bento-card { background: var(--white); border-radius: 24px; padding: 36px; border: 1px solid rgba(62,39,35,0.06); transition: transform 0.4s var(--ease-spring), box-shadow 0.4s; }
+    .bento-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(62,39,35,0.1); }
+    .bento-card--wide   { grid-column: span 7; }
+    .bento-card--narrow { grid-column: span 5; }
+    .bento-card--third  { grid-column: span 4; }
+    .bento-card--dark   { background: var(--espresso); }
+    .bento-number { font-family: var(--serif); font-size: 72px; font-weight: 300; line-height: 1; color: var(--pink-mid); margin-bottom: 12px; }
+    .bento-card--dark .bento-number { color: rgba(251,236,245,0.2); }
+    .bento-title { font-family: var(--serif); font-size: clamp(22px, 2.5vw, 32px); font-weight: 400; line-height: 1.2; color: var(--espresso); margin-bottom: 12px; }
+    .bento-card--dark .bento-title { color: var(--cream); }
+    .bento-desc { font-size: 14px; line-height: 1.72; color: var(--text-mid); font-weight: 300; }
+    .bento-card--dark .bento-desc { color: rgba(253,248,242,0.6); }
+    .bento-icon { width: 44px; height: 44px; background: var(--pink); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .bento-card--dark .bento-icon { background: rgba(251,236,245,0.12); }
+    @media (max-width: 900px) { .bento-card--wide, .bento-card--narrow, .bento-card--third { grid-column: span 12; } }
+
+    /* TESTIMONIALS */
+    #testimonials { padding: 130px 0; background: var(--cream); }
+    .testimonial-hero { background: var(--cream-deep); border-radius: 32px; padding: 64px; margin-bottom: 24px; position: relative; overflow: hidden; border: 1px solid var(--border); }
+    .testimonial-hero::before { content: '\201C'; position: absolute; top: -20px; left: 40px; font-family: var(--serif); font-size: 220px; color: var(--pink-mid); opacity: 0.5; line-height: 1; pointer-events: none; }
+    .testimonial-hero-text { font-family: var(--serif); font-size: clamp(20px, 2.5vw, 32px); font-weight: 300; font-style: italic; line-height: 1.55; color: var(--espresso); max-width: 800px; position: relative; z-index: 1; margin-bottom: 28px; }
+    .testimonial-author { display: flex; align-items: center; gap: 16px; }
+    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--cream-deep)); border: 2px solid var(--pink-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .testimonial-name { font-size: 13px; font-weight: 500; color: var(--espresso); }
+    .testimonial-detail { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
+    .testimonial-stars { display: flex; gap: 3px; margin-bottom: 6px; }
+    .star { color: var(--espresso); font-size: 12px; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .testimonial-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 32px; transition: transform 0.4s var(--ease-spring), box-shadow 0.4s; }
+    .testimonial-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(62,39,35,0.07); }
+    .testimonial-card-text { font-family: var(--serif); font-size: 16px; font-style: italic; line-height: 1.65; color: var(--text); margin-bottom: 24px; font-weight: 300; }
+    @media (max-width: 900px) { .testimonial-grid { grid-template-columns: 1fr; } .testimonial-hero { padding: 40px 28px; } }
+
+    /* HOE HET WERKT */
+    #hoe { padding: 130px 0; background: var(--cream-deep); }
+    .stappen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px; position: relative; }
+    .stappen-grid::before { content: ''; position: absolute; top: 36px; left: calc(16.66% + 16px); right: calc(16.66% + 16px); height: 1px; background: linear-gradient(to right, var(--pink-mid), transparent, var(--pink-mid)); }
+    .stap-card { text-align: center; }
+    .stap-number { width: 72px; height: 72px; border-radius: 50%; background: var(--espresso); color: var(--cream); font-family: var(--serif); font-size: 28px; font-weight: 300; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; position: relative; z-index: 1; border: 4px solid var(--cream-deep); }
+    .stap-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--espresso); margin-bottom: 14px; }
+    .stap-desc { font-size: 14px; line-height: 1.78; color: var(--text-mid); font-weight: 300; }
+    @media (max-width: 768px) { .stappen-grid { grid-template-columns: 1fr; } .stappen-grid::before { display: none; } }
+
+    /* AANBOD — extra styles */
+    .aanbod-price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+    .aanbod-per-persoon { font-size: 11px; color: rgba(253,248,242,0.4); letter-spacing: 0.06em; background: rgba(253,248,242,0.1); padding: 3px 10px; border-radius: 100px; }
+
+    .aanbod-label {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 20px;
+    }
+    .aanbod-label span {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(253,248,242,0.45); white-space: nowrap;
+    }
+    .aanbod-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(253,248,242,0.1);
+    }
+
+    /* BUNDELS */
+    .bundels-wrapper {
+      margin-top: 60px;
+    }
+    .bundels-header {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+      margin-bottom: 24px;
+    }
+    .bundels-sub {
+      font-size: 12px; color: rgba(253,248,242,0.4);
+      letter-spacing: 0.05em;
+    }
+    .bundels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .bundel-card {
+      background: rgba(253,248,242,0.05);
+      border: 1px solid rgba(253,248,242,0.1);
+      border-radius: 20px;
+      padding: 28px 26px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: background 0.35s, transform 0.4s var(--ease-spring), border-color 0.35s;
+    }
+    .bundel-card:hover {
+      background: rgba(253,248,242,0.09);
+      border-color: rgba(251,236,245,0.25);
+      transform: translateY(-3px);
+    }
+    .bundel-card--featured {
+      background: var(--pink);
+      border-color: var(--pink-mid);
+    }
+    .bundel-card--featured:hover { background: #f3d9ee; }
+
+    .bundel-top { display: flex; align-items: center; justify-content: space-between; }
+    .bundel-tag {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(253,248,242,0.55);
+      background: rgba(253,248,242,0.08);
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .bundel-tag--dark { background: rgba(62,39,35,0.1); color: var(--text-mid); }
+    .bundel-saving {
+      font-size: 10px; letter-spacing: 0.06em;
+      color: rgba(251,236,245,0.6);
+      background: rgba(251,236,245,0.08);
+      padding: 4px 10px; border-radius: 100px;
+    }
+    .bundel-saving--dark { background: rgba(62,39,35,0.08); color: var(--text-mid); }
+
+    .bundel-name {
+      font-family: var(--serif);
+      font-size: 22px; font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-top: 4px;
+    }
+    .bundel-desc {
+      font-size: 13px; line-height: 1.7;
+      color: rgba(253,248,242,0.52);
+      font-weight: 300;
+    }
+    .bundel-breakdown {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .bundel-breakdown span {
+      font-size: 11px; color: rgba(253,248,242,0.38);
+      letter-spacing: 0.04em;
+    }
+    .bundel-price-row {
+      display: flex; align-items: baseline; gap: 10px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(253,248,242,0.08);
+      margin-top: 4px;
+    }
+    .bundel-card--featured .bundel-price-row { border-color: rgba(62,39,35,0.1); }
+    .bundel-price {
+      font-family: var(--serif);
+      font-size: 32px; font-weight: 300;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .bundel-per {
+      font-size: 11px;
+      color: rgba(253,248,242,0.38);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 900px) {
+      .bundels-grid { grid-template-columns: 1fr; gap: 14px; }
+      .bundels-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .bundel-card { padding: 22px 20px; }
+      .aanbod-grid { margin-top: 36px; }
+      .bundels-wrapper { margin-top: 44px; }
+    }
+
+    /* AANBOD */
+    #aanbod { padding: 130px 0; background: var(--espresso); position: relative; overflow: hidden; }
+    #aanbod::before { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(251,236,245,0.07) 0%, transparent 70%); }
+    .aanbod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 64px; }
+    .aanbod-card { background: rgba(253,248,242,0.06); border: 1px solid rgba(253,248,242,0.12); border-radius: 24px; padding: 40px 32px; position: relative; overflow: hidden; transition: background 0.4s, transform 0.4s var(--ease-spring), border-color 0.4s; }
+    .aanbod-card:hover { background: rgba(253,248,242,0.1); border-color: rgba(251,236,245,0.3); transform: translateY(-4px); }
+    .aanbod-card--featured { background: var(--pink); border-color: var(--pink-mid); }
+    .aanbod-card--featured:hover { background: #f3d9ee; }
+    .aanbod-badge { position: absolute; top: 20px; right: 20px; background: var(--espresso); color: var(--cream); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; }
+    .aanbod-icon { width: 50px; height: 50px; background: rgba(251,236,245,0.12); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+    .aanbod-card--featured .aanbod-icon { background: rgba(62,39,35,0.1); }
+    .aanbod-type { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(251,236,245,0.45); margin-bottom: 10px; }
+    .aanbod-card--featured .aanbod-type { color: var(--text-soft); }
+    .aanbod-name { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--cream); margin-bottom: 16px; line-height: 1.2; }
+    .aanbod-card--featured .aanbod-name { color: var(--espresso); }
+    .aanbod-desc { font-size: 14px; line-height: 1.75; color: rgba(253,248,242,0.58); margin-bottom: 28px; font-weight: 300; }
+    .aanbod-card--featured .aanbod-desc { color: var(--text-mid); }
+    .aanbod-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+    .aanbod-features li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(253,248,242,0.58); }
+    .aanbod-card--featured .aanbod-features li { color: var(--text-mid); }
+    .aanbod-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: rgba(251,236,245,0.35); flex-shrink: 0; }
+    .aanbod-card--featured .aanbod-features li::before { background: var(--espresso); opacity: 0.4; }
+    .aanbod-price { font-family: var(--serif); font-size: 36px; font-weight: 300; color: var(--cream); margin-bottom: 20px; }
+    .aanbod-price span { font-size: 15px; color: rgba(253,248,242,0.35); }
+    .aanbod-card--featured .aanbod-price { color: var(--espresso); }
+    .aanbod-card--featured .aanbod-price span { color: var(--text-soft); }
+    @media (max-width: 900px) { .aanbod-grid { grid-template-columns: 1fr; } }
+
+    /* CTA */
+    #cta { padding: 140px 0; background: var(--pink); text-align: center; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; background: radial-gradient(circle, var(--pink-mid) 0%, transparent 65%); opacity: 0.5; pointer-events: none; }
+    .cta-headline { font-family: var(--serif); font-size: clamp(48px, 7vw, 96px); font-weight: 300; line-height: 1.02; color: var(--espresso); margin-bottom: 20px; position: relative; }
+    .cta-headline em { font-style: italic; }
+    .cta-sub { font-size: 16px; font-weight: 300; color: var(--text-mid); max-width: 480px; margin: 0 auto 48px; line-height: 1.85; }
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+    .cta-divider { display: flex; align-items: center; gap: 20px; max-width: 480px; margin: 0 auto 32px; color: var(--text-soft); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .cta-divider::before, .cta-divider::after { content: ''; flex: 1; height: 1px; background: var(--pink-mid); }
+    .email-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; }
+    .hero-input { flex: 1; padding: 14px 20px; font-family: var(--sans); font-size: 13px; background: var(--white); border: 1.5px solid var(--border); border-radius: 100px; color: var(--text); outline: none; transition: border-color 0.25s, box-shadow 0.25s; }
+    .hero-input::placeholder { color: var(--text-soft); }
+    .hero-input:focus { border-color: var(--espresso); box-shadow: 0 0 0 3px rgba(62,39,35,0.06); }
+    .cta-micro { margin-top: 16px; font-size: 11px; color: var(--text-soft); letter-spacing: 0.06em; }
+
+    /* FOOTER */
+    #footer { background: var(--espresso); padding: 64px 0 40px; }
+    .footer-inner { display: grid; grid-template-columns: 1fr auto auto; gap: 60px; align-items: start; margin-bottom: 48px; }
+    .footer-brand .nav-logo { color: var(--cream) !important; display: block; margin-bottom: 14px; }
+    .footer-tagline { font-size: 13px; color: rgba(253,248,242,0.40); line-height: 1.75; max-width: 240px; font-weight: 300; }
+    .footer-col-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(253,248,242,0.28); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(253,248,242,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; border-top: 1px solid rgba(253,248,242,0.08); }
+    .footer-copy { font-size: 12px; color: rgba(253,248,242,0.26); }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(253,248,242,0.14); display: flex; align-items: center; justify-content: center; color: rgba(253,248,242,0.46); text-decoration: none; transition: border-color 0.25s, color 0.25s; }
+    .footer-social a:hover { border-color: rgba(251,236,245,0.5); color: var(--cream); }
+    @media (max-width: 768px) { .footer-inner { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; gap: 16px; } }
+
+    /* FLOATING CTA */
+    #floating-cta { position: fixed; bottom: 28px; right: 28px; z-index: 89; opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); pointer-events: none; }
+    #floating-cta.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .floating-btn { display: flex; align-items: center; gap: 10px; background: var(--espresso); color: var(--cream); font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 14px 24px; border-radius: 100px; box-shadow: 0 8px 32px rgba(62,39,35,0.3); transition: transform 0.4s var(--ease-spring), box-shadow 0.4s; }
+    .floating-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(62,39,35,0.36); }
+    @media (max-width: 768px) { #floating-cta { bottom: 20px; right: 16px; left: 16px; } .floating-btn { justify-content: center; } }
+    /* ═══════════════════════════════════════════
+       MOBILE-FIRST — COMPREHENSIVE RESPONSIVE
+    ═══════════════════════════════════════════ */
+
+    /* NAV mobile */
+    @media (max-width: 900px) {
+      .nav-logo { font-size: 19px; }
+      /* Mobile hamburger placeholder - show boek nu pill only */
+      #nav .nav-links { display: none; }
+      #nav .nav-mobile-cta {
+        display: inline-flex !important;
+        font-size: 11px; padding: 10px 20px;
+        background: var(--espresso); color: var(--cream);
+        border-radius: 100px; text-decoration: none;
+        font-family: var(--sans); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+        transition: background 0.3s;
+      }
+      #nav:not(.scrolled) .nav-mobile-cta { background: rgba(253,248,242,0.18); color: var(--cream); border: 1px solid rgba(253,248,242,0.35); }
+      #nav.scrolled .nav-mobile-cta { background: var(--espresso); color: var(--cream); }
+    }
+
+    /* KUNDALINI section mobile */
+    @media (max-width: 900px) {
+      #kundalini { padding: 80px 0; }
+      .kundalini-grid { grid-template-columns: 1fr; gap: 40px; }
+      .kundalini-img { aspect-ratio: 3/2; border-radius: 120px 120px 20px 20px; }
+      .kundalini-float-card { right: 0; bottom: -16px; }
+    }
+    @media (max-width: 480px) {
+      #kundalini { padding: 60px 0; }
+      .kundalini-float-card { display: none; }
+    }
+
+    /* DEMI section mobile */
+    @media (max-width: 900px) {
+      #demi { padding: 80px 0; }
+      .demi-grid { grid-template-columns: 1fr; gap: 40px; }
+      .demi-img { aspect-ratio: 4/3; border-radius: 80px 80px 20px 20px; }
+      .demi-stats { gap: 24px; }
+      .demi-stat p { font-size: 34px; }
+      .pull-quote { font-size: clamp(18px, 4.5vw, 26px); padding-left: 20px; }
+    }
+    @media (max-width: 480px) {
+      #demi { padding: 56px 0; }
+      .demi-stats { gap: 20px; }
+    }
+
+    /* TRANSFORMATIES bento mobile */
+    @media (max-width: 900px) {
+      #transformaties { padding: 80px 0; }
+      .bento-card--wide, .bento-card--narrow, .bento-card--third { grid-column: span 12; }
+      .bento-number { font-size: 52px; }
+    }
+    @media (max-width: 480px) {
+      #transformaties { padding: 56px 0; }
+      .bento-card { padding: 28px 24px; border-radius: 20px; }
+    }
+
+    /* TESTIMONIALS — desktop grid stays, swiper always rendered */
+    #testimonials { padding: 130px 0; background: var(--cream); }
+    .testimonial-hero { background: var(--cream-deep); border-radius: 32px; padding: 64px; margin-bottom: 24px; position: relative; overflow: hidden; border: 1px solid var(--border); }
+    .testimonial-hero::before { content: '\201C'; position: absolute; top: -20px; left: 40px; font-family: var(--serif); font-size: 220px; color: var(--pink-mid); opacity: 0.5; line-height: 1; pointer-events: none; }
+    .testimonial-hero-text { font-family: var(--serif); font-size: clamp(20px, 2.5vw, 32px); font-weight: 300; font-style: italic; line-height: 1.55; color: var(--espresso); max-width: 800px; position: relative; z-index: 1; margin-bottom: 28px; }
+    .testimonial-author { display: flex; align-items: center; gap: 16px; }
+    .testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--pink), var(--cream-deep)); border: 2px solid var(--pink-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .testimonial-name { font-size: 13px; font-weight: 500; color: var(--espresso); }
+    .testimonial-detail { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
+    .testimonial-stars { display: flex; gap: 3px; margin-bottom: 6px; }
+    .star { color: var(--espresso); font-size: 12px; }
+
+    /* Swiper — used on BOTH desktop (grid fallback) and mobile */
+    .testimonial-swiper { position: relative; overflow: hidden; border-radius: 20px; }
+    .testimonial-swiper-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.32,0.72,0,1);
+      will-change: transform;
+    }
+    .testimonial-swiper .testimonial-card {
+      min-width: 100%; width: 100%;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      flex-shrink: 0;
+    }
+    .testimonial-card-text { font-family: var(--serif); font-size: 16px; font-style: italic; line-height: 1.65; color: var(--text); margin-bottom: 24px; font-weight: 300; }
+
+    /* Swiper nav */
+    .swiper-nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 0; }
+    .swiper-dots { display: flex; gap: 7px; }
+    .swiper-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pink-mid); transition: background 0.3s, transform 0.3s; cursor: pointer; }
+    .swiper-dot.active { background: var(--espresso); transform: scale(1.2); }
+    .swiper-arrows { display: flex; gap: 8px; }
+    .swiper-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--white); color: var(--espresso);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.25s, border-color 0.25s, transform 0.3s;
+    }
+    .swiper-arrow:hover { background: var(--espresso); color: var(--cream); border-color: var(--espresso); transform: scale(1.05); }
+    .swiper-arrow:disabled { opacity: 0.3; pointer-events: none; }
+
+    /* Desktop: show grid, hide swiper */
+    @media (min-width: 769px) {
+      .testimonial-swiper { display: none; }
+      .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .testimonial-grid .testimonial-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 32px; transition: transform 0.4s var(--ease-spring), box-shadow 0.4s; }
+      .testimonial-grid .testimonial-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(62,39,35,0.07); }
+    }
+    /* Mobile: hide grid, show swiper */
+    @media (max-width: 768px) {
+      .testimonial-grid { display: none; }
+      .testimonial-swiper { display: block; }
+      #testimonials { padding: 60px 0; }
+      .testimonial-hero { padding: 28px 22px; border-radius: 20px; }
+      .testimonial-hero::before { font-size: 130px; }
+      .testimonial-hero-text { font-size: clamp(16px, 4.5vw, 22px); margin-bottom: 20px; }
+      .swiper-arrow { width: 32px; height: 32px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL-STACK CARDS (TRANSFORMATIES MOBILE)
+       Sticky scroll: kaarten schuiven één voor één
+       van onderkant scherm naar vaste plek omhoog
+    ═══════════════════════════════════════════ */
+    .bento-desktop { display: grid; }
+    .stack-scene { display: none; }
+
+    @media (max-width: 768px) {
+      .bento-desktop { display: none; }
+      .stack-scene { display: block; }
+
+      /* Outer wrapper: 5 kaarten × 25vh scroll per kaart — compact */
+      .stack-scene {
+        position: relative;
+        height: calc(5 * 25vh + 340px);
+      }
+
+      /* Sticky track: pins en centreert de kaart verticaal in het scherm */
+      .stack-track {
+        position: sticky;
+        /* Verticaal centreren: (100vh - kaarthoogte - dots) / 2 */
+        top: calc(50vh - 170px);
+        height: 340px; /* 280px kaart + 60px dots + ademruimte */
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: visible;
+        pointer-events: none;
+      }
+
+      /* Each card sits in the same spot, animates in from bottom */
+      .stack-card {
+        position: absolute;
+        left: 0; right: 0;
+        margin: 0 auto;
+        width: 100%;
+        height: 280px; /* vaste hoogte gelijk aan kaart 1 "Rust in je hoofd" */
+        border-radius: 24px;
+        padding: 32px 28px;
+        display: flex; flex-direction: column; gap: 12px;
+        background: var(--white);
+        border: 1px solid rgba(62,39,35,0.06);
+        box-shadow: 0 8px 40px rgba(62,39,35,0.10);
+        overflow: hidden; /* tekst die niet past blijft netjes binnen */
+        /* Default: hidden below the sticky viewport */
+        transform: translateY(320px);
+        opacity: 0;
+        transition:
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 0.5s ease;
+        will-change: transform, opacity;
+        pointer-events: none;
+      }
+
+      /* Active card: centered in viewport */
+      .stack-card.is-active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 5;
+      }
+
+      /* Exiting card: slides up out of view */
+      .stack-card.is-exiting {
+        transform: translateY(-320px) scale(0.96);
+        opacity: 0;
+        z-index: 3;
+        transition:
+          transform 0.65s cubic-bezier(0.32, 0.72, 0, 1),
+          opacity 0.4s ease;
+      }
+
+      /* Next card: just below, ready to animate up */
+      .stack-card.is-next {
+        transform: translateY(320px);
+        opacity: 0;
+        z-index: 4;
+        transition: none;
+      }
+
+      .stack-card--dark { background: var(--espresso) !important; }
+
+      .stack-num {
+        font-family: var(--sans); font-size: 9px; letter-spacing: 0.22em;
+        text-transform: uppercase; color: rgba(62,39,35,0.32);
+      }
+      .stack-card--dark .stack-num { color: rgba(253,248,242,0.32); }
+
+      .stack-title {
+        font-family: var(--serif); font-size: 28px; font-weight: 400;
+        line-height: 1.12; color: var(--espresso);
+      }
+      .stack-card--dark .stack-title { color: var(--cream); }
+
+      .stack-desc {
+        font-size: 14px; line-height: 1.72; color: var(--text-mid); font-weight: 300;
+      }
+      .stack-card--dark .stack-desc { color: rgba(253,248,242,0.65); }
+
+      /* Dot indicator — direct onder de kaart */
+      .stack-dots {
+        position: absolute;
+        bottom: 6px;
+        left: 0; right: 0;
+        display: flex; gap: 7px; justify-content: center;
+        z-index: 10;
+        pointer-events: auto;
+      }
+      .stack-dot {
+        width: 7px; height: 7px; border-radius: 50%;
+        background: rgba(62,39,35,0.18);
+        transition: background 0.3s, transform 0.3s; cursor: pointer;
+      }
+      .stack-dot.active { background: var(--espresso); transform: scale(1.3); }
+
+      /* Progress counter top-right of sticky area */
+      .stack-track::before {
+        content: attr(data-progress);
+        position: absolute;
+        top: 20px; right: 0;
+        font-family: var(--sans); font-size: 9px; letter-spacing: 0.2em;
+        text-transform: uppercase; color: rgba(62,39,35,0.3);
+        z-index: 10;
+      }
+    }
+
+    /* HOE HET WERKT mobile */
+    @media (max-width: 900px) {
+      #hoe { padding: 80px 0; }
+      .stappen-grid { grid-template-columns: 1fr; gap: 40px; margin-top: 48px; }
+      .stappen-grid::before { display: none; }
+      .stap-number { width: 60px; height: 60px; font-size: 24px; }
+    }
+    @media (max-width: 480px) {
+      #hoe { padding: 56px 0; }
+      /* Wide banner foto compact op mobiel */
+      #hoe > .container > div:last-child > div { height: 200px !important; border-radius: 20px !important; }
+    }
+
+    /* AANBOD mobile */
+    @media (max-width: 900px) {
+      #aanbod { padding: 80px 0; }
+      .aanbod-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 48px; }
+      .aanbod-card { padding: 32px 24px; }
+    }
+    @media (max-width: 480px) {
+      #aanbod { padding: 56px 0; }
+    }
+
+    /* SECTION CENTER mobile */
+    @media (max-width: 768px) {
+      .section-center { margin-bottom: 44px; }
+      .section-headline { font-size: clamp(30px, 7.5vw, 48px); }
+      .section-body { font-size: 14px; }
+    }
+
+    /* CTA section mobile */
+    @media (max-width: 768px) {
+      #cta { padding: 90px 0; }
+      .cta-headline { font-size: clamp(38px, 9vw, 64px); }
+      .cta-sub { font-size: 15px; margin-bottom: 36px; }
+      .cta-actions { flex-direction: column; align-items: center; gap: 12px; }
+      .cta-actions .btn { width: 100%; max-width: 360px; justify-content: center; }
+      .email-form { flex-direction: column; gap: 10px; max-width: 100%; }
+      .email-form .hero-input { width: 100%; border-radius: 100px; }
+      .email-form .btn { width: 100%; justify-content: center; border-radius: 100px; }
+    }
+    @media (max-width: 480px) {
+      #cta { padding: 72px 0; }
+      .cta-headline { font-size: clamp(34px, 8.5vw, 52px); }
+    }
+
+    /* FOOTER mobile */
+    @media (max-width: 768px) {
+      #footer { padding: 52px 0 32px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+
+    /* FLOATING CTA mobile */
+    @media (max-width: 480px) {
+      #floating-cta { bottom: 16px; right: 12px; left: 12px; }
+      .floating-btn { justify-content: center; padding: 13px 20px; }
+    }
+
+    /* Kundalini / Demi section headlines mobile */
+    @media (max-width: 480px) {
+      .section-headline { font-size: clamp(28px, 7vw, 42px); }
+      .benefit-list li { font-size: 13px; }
+      .pull-quote { font-size: clamp(16px, 4vw, 22px); }
+      #kundalini, #demi, #transformaties, #testimonials, #hoe, #aanbod { padding: 56px 0; }
+    }
+
+    /* Prevent horizontal overflow everywhere */
+    section, div, footer, nav { max-width: 100vw; }
+  </style>
+</head>
+<body>
+
+<!-- FLOATING CTA -->
+<div id="floating-cta">
+  <a href="#cta" class="floating-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    Boek een sessie
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">K<span>undalini</span> · Demi</a>
+      <a href="#cta" class="nav-mobile-cta" style="display:none;">Boek nu</a>
+      <ul class="nav-links">
+        <li><a href="#kundalini">Wat is het?</a></li>
+        <li><a href="#demi">Over Demi</a></li>
+        <li><a href="#testimonials">Ervaringen</a></li>
+        <li><a href="#aanbod">Aanbod</a></li>
+        <li><a href="#cta" class="btn btn--primary nav-cta">Boek nu</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+  01 · HERO — VOLLEDIG SCHERMBREED
+  AIDA: ATTENTION
+══════════════════════════════════ -->
+<section id="hero">
+  <!-- ↓ Vervang dit blok door: <img class="hero-bg-img" src="foto.jpg" alt="" /> -->
+  <div class="hero-bg-placeholder">
+    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8">
+      <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+    </svg>
+    <p>HERO FOTO — VOLLEDIG SCHERMBREED<br/>Portret Demi of sfeervolle meditatieruimte<br/>Aanbevolen formaat: 1920 × 1080px of hoger<br/>Verticale foto werkt ook goed op mobiel</p>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-top"></div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-inner">
+        <h1 class="hero-headline reveal reveal-delay-1">
+          Ontwaken begint<br class="hero-br-mobile"/><em>van binnenuit.</em>
+        </h1>
+        <p class="hero-sub reveal reveal-delay-2">
+          Ontdek de kracht van Kundalini — een diepgaande praktijk die spanning loslaat, je energiesysteem activeert en je terugbrengt bij wie je werkelijk bent.
+        </p>
+        <div class="hero-actions reveal reveal-delay-3">
+          <a href="#cta" class="btn btn--primary" style="padding:18px 36px;font-size:14px;">
+            Boek gratis gesprek
+            <span class="btn-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+          <a href="#kundalini" class="btn btn--outline-light" style="padding:18px 32px;font-size:14px;">Meer leren</a>
+        </div>
+        <div class="hero-trust reveal reveal-delay-4">
+          <div class="hero-trust-item"><div class="hero-trust-dot"></div>Gecertificeerd facilitator</div>
+          <div class="hero-trust-item"><div class="hero-trust-dot"></div>30+ sessies begeleid</div>
+          <div class="hero-trust-item"><div class="hero-trust-dot"></div>Persoonlijk &amp; op maat</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  02 · TRUST STRIP
+  AIDA: INTEREST — directe geloofwaardigheid
+══════════════════════════════════ -->
+<div id="trust">
+  <div class="container">
+    <div class="trust-strip">
+      <div class="trust-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.5)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Gecertificeerd Kundalini Facilitator
+      </div>
+      <div class="trust-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.5)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Sessies op jouw tempo
+      </div>
+      <div class="trust-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.5)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Resultaten voelbaar vanaf sessie één
+      </div>
+      <div class="trust-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.5)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Online &amp; in persoon
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+  03 · WAT IS KUNDALINI?
+  AIDA: INTEREST — educatie, nieuwsgierigheid
+══════════════════════════════════ -->
+<section id="kundalini">
+  <div class="container">
+    <div class="kundalini-grid">
+      <div class="kundalini-visual reveal">
+        <div class="kundalini-img">
+          <div class="pp">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Sfeerfoto Kundalini<br/>meditatie, natuur of sessiesfeer</span>
+          </div>
+        </div>
+        <div class="kundalini-quote">"Elke adem brengt je dichter bij wie je werkelijk bent"</div>
+        <div class="kundalini-float-card">
+          <p>∞</p>
+          <span>Energiesysteem<br/>activatie</span>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow reveal">De Praktijk</span>
+        <h2 class="section-headline reveal reveal-delay-1">De kunst van<br/><em>innerlijk ontwaken.</em></h2>
+        <p class="section-body reveal reveal-delay-2">Kundalini is een eeuwenoude praktijk die gebruikmaakt van ademhaling, beweging, meditatie en klank om diepgewortelde energie vrij te maken. Het werkt direct op je zenuwstelsel — en de effecten zijn voelbaar, meetbaar en blijvend.</p>
+        <ul class="benefit-list reveal reveal-delay-3">
+          <li><div class="benefit-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E2723" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span>Diepgaande ontspanning van het zenuwstelsel</span></li>
+          <li><div class="benefit-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E2723" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><span>Loslaten van oude patronen en blokkades</span></li>
+          <li><div class="benefit-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E2723" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span>Dieper contact met jezelf en je intuïtie</span></li>
+          <li><div class="benefit-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E2723" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><span>Helderheid, rust en duurzame innerlijke kracht</span></li>
+        </ul>
+        <a href="#demi" class="btn btn--primary reveal reveal-delay-4">
+          Lees Demi's verhaal
+          <span class="btn-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  04 · DEMI'S VERHAAL
+  AIDA: INTEREST→DESIRE — vertrouwen & emotionele connectie
+══════════════════════════════════ -->
+<section id="demi">
+  <div class="container">
+    <div class="demi-grid">
+      <div class="reveal">
+        <div class="demi-img">
+          <div class="pp">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Portretfoto Demi<br/>warm, authentiek, zelfverzekerd</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow reveal">Over Demi</span>
+        <h2 class="section-headline reveal reveal-delay-1">Van zoeken<br/>naar <em>weten.</em></h2>
+        <p class="section-body reveal reveal-delay-2">Demi weet hoe het voelt om verloren te lopen in het leven — overvraagd, disconnected en op zoek naar iets diepers. Na jaren van persoonlijke transformatie ontdekte ze Kundalini als de sleutel die alles opende.</p>
+        <blockquote class="pull-quote reveal reveal-delay-3">"Ik zocht de antwoorden buiten mezelf — totdat ik leerde dat alles wat ik zocht, al in mij aanwezig was."</blockquote>
+        <p class="section-body reveal reveal-delay-4">Vandaag begeleidt Demi vrouwen en mannen bij hun eigen ontwaken. Geen stappenplannen, geen dogma's — alleen een eerlijke, diepgaande begeleiding die je terugbrengt bij wie je echt bent.</p>
+        <div class="demi-stats reveal reveal-delay-5">
+          <div class="demi-stat"><p>30+</p><span>Sessies begeleid</span></div>
+          <div class="demi-stat"><p>5+</p><span>Jaar ervaring</span></div>
+          <div class="demi-stat"><p>100%</p><span>Persoonlijk</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  05 · TRANSFORMATIES
+  AIDA: DESIRE — wat levert het concreet op?
+══════════════════════════════════ -->
+<section id="transformaties">
+  <div class="container">
+    <div class="section-center">
+      <span class="eyebrow reveal">Wat het jou brengt</span>
+      <h2 class="section-headline reveal reveal-delay-1">Voel het verschil.<br/><em>Elke dag.</em></h2>
+      <p class="section-body reveal reveal-delay-2">Kundalini werkt op alle lagen — lichaam, geest en ziel. Dit is wat mensen ervaren.</p>
+    </div>
+
+    <!-- DESKTOP: bento grid (hidden on mobile) -->
+    <div class="bento-grid bento-desktop">
+      <div class="bento-card bento-card--wide bento-card--dark reveal reveal-delay-1">
+        <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.8)" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="bento-number">01</div>
+        <h3 class="bento-title">Rust in je hoofd.</h3>
+        <p class="bento-desc">De constante stroom van gedachten kalmeert. Je ervaart ruimte, stilte en helderheid die je misschien al lang niet meer hebt gevoeld.</p>
+      </div>
+      <div class="bento-card bento-card--narrow reveal reveal-delay-2" style="background:var(--cream-deep);">
+        <div class="bento-number" style="color:var(--pink-mid);">02</div>
+        <h3 class="bento-title">Lichaamsbewustzijn.</h3>
+        <p class="bento-desc">Je leert luisteren naar de signalen van je lichaam. Spanning lost op als vanzelf.</p>
+      </div>
+      <div class="bento-card bento-card--third reveal reveal-delay-1">
+        <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3E2723" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="bento-number">03</div>
+        <h3 class="bento-title">Meer energie.</h3>
+        <p class="bento-desc">Diepere slaap, meer vitaliteit en een grondig gevoel van herstel elke dag.</p>
+      </div>
+      <div class="bento-card bento-card--third bento-card--dark reveal reveal-delay-2">
+        <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.8)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="bento-number">04</div>
+        <h3 class="bento-title">Dieper contact.</h3>
+        <p class="bento-desc">Met jezelf, je emoties en de mensen om je heen. Echte verbinding begint van binnen.</p>
+      </div>
+      <div class="bento-card bento-card--third reveal reveal-delay-3" style="background:var(--pink-mid);">
+        <div class="bento-number" style="color:rgba(62,39,35,0.18);">05</div>
+        <h3 class="bento-title">Zelfvertrouwen.</h3>
+        <p class="bento-desc">Je handelt vanuit kracht. Niet vanuit angst, verleden of verwachtingen van anderen.</p>
+      </div>
+    </div>
+
+    <!-- MOBILE: scroll-stack cards (hidden on desktop) -->
+    <div class="stack-scene" id="stackScene">
+      <div class="stack-track" id="stackTrack">
+        <div class="stack-card stack-card--dark">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.8)" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="stack-num">01 / 05</div>
+          <h3 class="stack-title">Rust in je hoofd.</h3>
+          <p class="stack-desc">De constante stroom van gedachten kalmeert. Je ervaart ruimte, stilte en helderheid die je misschien al lang niet meer hebt gevoeld.</p>
+        </div>
+        <div class="stack-card" style="background:var(--cream-deep);">
+          <div class="stack-num" style="color:var(--text-soft);">02 / 05</div>
+          <h3 class="stack-title" style="color:var(--espresso);">Lichaamsbewustzijn.</h3>
+          <p class="stack-desc" style="color:var(--text-mid);">Je leert luisteren naar de signalen van je lichaam. Spanning lost op als vanzelf.</p>
+        </div>
+        <div class="stack-card" style="background:var(--white);">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3E2723" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <div class="stack-num" style="color:var(--text-soft);">03 / 05</div>
+          <h3 class="stack-title" style="color:var(--espresso);">Meer energie.</h3>
+          <p class="stack-desc" style="color:var(--text-mid);">Diepere slaap, meer vitaliteit en een grondig gevoel van herstel elke dag.</p>
+        </div>
+        <div class="stack-card stack-card--dark">
+          <div class="bento-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.8)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <div class="stack-num">04 / 05</div>
+          <h3 class="stack-title">Dieper contact.</h3>
+          <p class="stack-desc">Met jezelf, je emoties en de mensen om je heen. Echte verbinding begint van binnen.</p>
+        </div>
+        <div class="stack-card" style="background:var(--pink-mid);">
+          <div class="stack-num" style="color:rgba(62,39,35,0.4);">05 / 05</div>
+          <h3 class="stack-title" style="color:var(--espresso);">Zelfvertrouwen.</h3>
+          <p class="stack-desc" style="color:var(--text-mid);">Je handelt vanuit kracht. Niet vanuit angst, verleden of verwachtingen van anderen.</p>
+        </div>
+      </div>
+      <!-- Dots indicator -->
+      <div class="stack-dots" id="stackDots">
+        <span class="stack-dot active"></span>
+        <span class="stack-dot"></span>
+        <span class="stack-dot"></span>
+        <span class="stack-dot"></span>
+        <span class="stack-dot"></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  06 · TESTIMONIALS
+  AIDA: DESIRE — social proof op het juiste moment
+  ✅ BEWUST VÓÓR het aanbod — bezoeker is nu warm genoeg
+══════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-center">
+      <span class="eyebrow reveal">Wat anderen ervaren</span>
+      <h2 class="section-headline reveal reveal-delay-1">Woorden van mensen<br/>die de stap <em>zetten.</em></h2>
+    </div>
+    <div class="testimonial-hero reveal">
+      <p class="testimonial-hero-text">"Na mijn eerste sessie bij Demi voelde ik iets wat ik in jaren niet meer had gevoeld — echte rust. Niet de rust van uitgeput zijn, maar innerlijke stilte. Ik had nooit gedacht dat zo'n korte sessie zo'n diepgaand effect kon hebben."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">
+          <div class="pp" style="font-size:8px;padding:4px;gap:2px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        </div>
+        <div>
+          <div class="testimonial-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testimonial-name">Sarah V.</p>
+          <p class="testimonial-detail">Marketing Manager · Amsterdam</p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-swiper" id="testimonialSwiper">
+      <div class="testimonial-swiper-track" id="testimonialTrack">
+        <div class="testimonial-card">
+          <div class="testimonial-stars" style="margin-bottom:16px;"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testimonial-card-text">"Demi heeft een zeldzame gave om je veilig en gezien te laten voelen. Ik ben na het traject een ander mens. Echt."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar"><div class="pp" style="font-size:8px;padding:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+            <div><p class="testimonial-name">Marieke D.</p><p class="testimonial-detail">Ondernemer · Utrecht</p></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars" style="margin-bottom:16px;"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testimonial-card-text">"Ik was sceptisch, maar na drie sessies kon ik niet meer ontkennen wat er veranderde. Minder stress, beter slapen, en een gevoel van thuiskomen."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar"><div class="pp" style="font-size:8px;padding:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+            <div><p class="testimonial-name">Thomas R.</p><p class="testimonial-detail">Softwareontwikkelaar · Rotterdam</p></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars" style="margin-bottom:16px;"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+          <p class="testimonial-card-text">"Het transformatietraject was de beste investering in mezelf die ik ooit heb gedaan. Ik ga nu door het leven vanuit keuze — niet vanuit angst."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar"><div class="pp" style="font-size:8px;padding:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+            <div><p class="testimonial-name">Lena M.</p><p class="testimonial-detail">Coach · Den Haag</p></div>
+          </div>
+        </div>
+      </div>
+      <!-- Swiper navigation -->
+      <div class="swiper-nav">
+        <div class="swiper-dots" id="swiperDots">
+          <span class="swiper-dot active"></span>
+          <span class="swiper-dot"></span>
+          <span class="swiper-dot"></span>
+        </div>
+        <div class="swiper-arrows">
+          <button class="swiper-arrow" id="swiperPrev" aria-label="Vorige">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="swiper-arrow" id="swiperNext" aria-label="Volgende">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  07 · HOE HET WERKT
+  AIDA: DESIRE→ACTION — drempel wegnemen
+══════════════════════════════════ -->
+<section id="hoe">
+  <div class="container">
+    <div class="section-center">
+      <span class="eyebrow reveal">Hoe het werkt</span>
+      <h2 class="section-headline reveal reveal-delay-1">Drie stappen naar<br/><em>jouw transformatie.</em></h2>
+      <p class="section-body reveal reveal-delay-2">Beginnen is eenvoudiger dan je denkt. Geen ingewikkelde intake, geen verplichtingen — gewoon een eerlijk gesprek.</p>
+    </div>
+    <div class="stappen-grid">
+      <div class="stap-card reveal reveal-delay-1">
+        <div class="stap-number">1</div>
+        <h3 class="stap-title">Gratis kennismaking</h3>
+        <p class="stap-desc">We plannen een vrijblijvend gesprek van 30 minuten. Je stelt vragen, ik luister. Samen kijken we wat er speelt en of er een klik is.</p>
+      </div>
+      <div class="stap-card reveal reveal-delay-2">
+        <div class="stap-number">2</div>
+        <h3 class="stap-title">Jouw eerste sessie</h3>
+        <p class="stap-desc">De eerste sessie is volledig op jou afgestemd. Je hoeft niets te kunnen of weten — alleen aanwezig zijn in je lichaam.</p>
+      </div>
+      <div class="stap-card reveal reveal-delay-3">
+        <div class="stap-number">3</div>
+        <h3 class="stap-title">Duurzame transformatie</h3>
+        <p class="stap-desc">Na elke sessie groeit het besef. We bouwen samen aan een fundament van innerlijke rust, kracht en authentiek leven.</p>
+      </div>
+    </div>
+    <div style="margin-top:64px;" class="reveal">
+      <div style="width:100%;height:300px;border-radius:32px;overflow:hidden;border:1px solid var(--border);">
+        <div class="pp" style="height:100%;background:linear-gradient(135deg,var(--pink) 0%,var(--cream-deep) 50%,var(--pink-mid) 100%);">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Brede sfeerfoto sessieruimte of natuur<br/>Horizontale oriëntatie · 1200 × 400px aanbevolen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  08 · AANBOD
+  AIDA: ACTION — sessies + bundels met echte prijzen
+══════════════════════════════════ -->
+<section id="aanbod">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="section-center">
+      <span class="eyebrow eyebrow--light reveal">Het Aanbod</span>
+      <h2 class="section-headline reveal reveal-delay-1" style="color:var(--cream);">Kies jouw<br/><em>pad naar transformatie.</em></h2>
+      <p class="section-body reveal reveal-delay-2" style="color:rgba(253,248,242,0.58);">Of je eenmalig wilt kennismaken of dieper wilt gaan — er is een sessie die bij jou past.</p>
+    </div>
+
+    <!-- ── LOSSE SESSIES ── -->
+    <div class="aanbod-label reveal">
+      <span>Losse sessies</span>
+    </div>
+    <div class="aanbod-grid">
+
+      <!-- Groepssessie -->
+      <div class="aanbod-card reveal reveal-delay-1">
+        <div class="aanbod-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.7)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <p class="aanbod-type">Groep · Kundalini Awakening</p>
+        <h3 class="aanbod-name">Groeps&shy;sessie</h3>
+        <p class="aanbod-desc">Ervaar Kundalini samen met anderen in een krachtige groepsdynamiek. Een toegankelijke manier om te beginnen.</p>
+        <ul class="aanbod-features">
+          <li>Kundalini Awakening in groep</li>
+          <li>Ademwerk, beweging &amp; meditatie</li>
+          <li>Verbindende groepsenergie</li>
+          <li>Ideaal als eerste kennismaking</li>
+        </ul>
+        <div class="aanbod-price-row">
+          <p class="aanbod-price">€&thinsp;88 <span>/ sessie</span></p>
+        </div>
+        <a href="#cta" class="btn btn--light" style="font-size:12px;padding:13px 26px;">Inschrijven</a>
+      </div>
+
+      <!-- Privésessie — featured -->
+      <div class="aanbod-card aanbod-card--featured reveal reveal-delay-2">
+        <span class="aanbod-badge">Meest gekozen</span>
+        <div class="aanbod-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3E2723" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <p class="aanbod-type" style="color:var(--text-soft);">1-op-1 · Kundalini Awakening</p>
+        <h3 class="aanbod-name" style="color:var(--espresso);">Privé&shy;sessie</h3>
+        <p class="aanbod-desc" style="color:var(--text-mid);">De meest persoonlijke ervaring — volledig afgestemd op jouw lichaam, energie en vraagstuk.</p>
+        <ul class="aanbod-features">
+          <li>Volledig 1-op-1 met Demi</li>
+          <li>Ademwerk, beweging &amp; meditatie</li>
+          <li>Diepgaande persoonlijke begeleiding</li>
+          <li>Integratie &amp; nabespreking</li>
+        </ul>
+        <div class="aanbod-price-row">
+          <p class="aanbod-price" style="color:var(--espresso);">€&thinsp;150 <span style="color:var(--text-soft);">/ sessie</span></p>
+        </div>
+        <a href="#cta" class="btn btn--primary">
+          Sessie boeken
+          <span class="btn-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+
+      <!-- Duosessie -->
+      <div class="aanbod-card reveal reveal-delay-3">
+        <div class="aanbod-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(251,236,245,0.7)" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke-dasharray="2 2"/></svg>
+        </div>
+        <p class="aanbod-type">2 personen · Kundalini Awakening</p>
+        <h3 class="aanbod-name">Duo&shy;sessie</h3>
+        <p class="aanbod-desc">Samen met een partner, vriendin of geliefde. Deel de transformatie en versterk jullie onderlinge verbinding.</p>
+        <ul class="aanbod-features">
+          <li>Sessie voor 2 personen</li>
+          <li>Gedeelde Kundalini-ervaring</li>
+          <li>Versterkt onderlinge verbinding</li>
+          <li>Ideaal voor stellen of vriendinnen</li>
+        </ul>
+        <div class="aanbod-price-row">
+          <p class="aanbod-price">€&thinsp;200 <span>/ sessie</span></p>
+          <span class="aanbod-per-persoon">€ 100 p.p.</span>
+        </div>
+        <a href="#cta" class="btn btn--light" style="font-size:12px;padding:13px 26px;">Boeken</a>
+      </div>
+    </div>
+
+    <!-- ── BUNDELS ── -->
+    <div class="bundels-wrapper reveal">
+      <div class="bundels-header">
+        <div class="aanbod-label" style="margin-bottom:0;">
+          <span>Bundels — meer sessies, meer besparing</span>
+        </div>
+        <p class="bundels-sub">Commit aan je groei en profiteer van voordeel</p>
+      </div>
+
+      <div class="bundels-grid">
+
+        <!-- Bundel 1: 5× groep -->
+        <div class="bundel-card reveal reveal-delay-1">
+          <div class="bundel-top">
+            <div class="bundel-tag">Groep</div>
+            <div class="bundel-saving">Bespaar € 90</div>
+          </div>
+          <h4 class="bundel-name">5× Groepssessie</h4>
+          <p class="bundel-desc">Vijf Kundalini Awakening groepssessies naar keuze in te plannen.</p>
+          <div class="bundel-price-row">
+            <p class="bundel-price">€&thinsp;350</p>
+            <span class="bundel-per">€ 70 / sessie</span>
+          </div>
+          <a href="#cta" class="btn btn--outline-light" style="font-size:11px;padding:11px 22px;margin-top:auto;">Bundel kiezen</a>
+        </div>
+
+        <!-- Bundel 2: 5× privé — featured -->
+        <div class="bundel-card bundel-card--featured reveal reveal-delay-2">
+          <div class="bundel-top">
+            <div class="bundel-tag bundel-tag--dark">Privé</div>
+            <div class="bundel-saving bundel-saving--dark">Bespaar € 150</div>
+          </div>
+          <h4 class="bundel-name" style="color:var(--espresso);">5× Privésessie</h4>
+          <p class="bundel-desc" style="color:var(--text-mid);">Vijf persoonlijke 1-op-1 Kundalini Awakening sessies — het ultieme transformatietraject.</p>
+          <div class="bundel-price-row">
+            <p class="bundel-price" style="color:var(--espresso);">€&thinsp;600</p>
+            <span class="bundel-per" style="color:var(--text-soft);">€ 120 / sessie</span>
+          </div>
+          <a href="#cta" class="btn btn--primary" style="font-size:11px;padding:11px 22px;margin-top:auto;">Bundel kiezen</a>
+        </div>
+
+        <!-- Bundel 3: Mix -->
+        <div class="bundel-card reveal reveal-delay-3">
+          <div class="bundel-top">
+            <div class="bundel-tag">Mix</div>
+            <div class="bundel-saving">Bespaar € 50</div>
+          </div>
+          <h4 class="bundel-name">Mix Bundel</h4>
+          <p class="bundel-desc">2× privésessie + 3× groepssessie — het beste van beide werelden.</p>
+          <div class="bundel-breakdown">
+            <span>2× privé (€ 150)</span>
+            <span>3× groep (€ 88)</span>
+          </div>
+          <div class="bundel-price-row">
+            <p class="bundel-price">€&thinsp;450</p>
+            <span class="bundel-per">5 sessies totaal</span>
+          </div>
+          <a href="#cta" class="btn btn--outline-light" style="font-size:11px;padding:11px 22px;margin-top:auto;">Bundel kiezen</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+  09 · DUBBELE CTA — FINALE CONVERSIE-PUSH
+  AIDA: ACTION
+══════════════════════════════════ -->
+<section id="cta">
+  <div class="container">
+    <span class="eyebrow reveal" style="display:block;text-align:center;background:transparent;border:none;color:var(--text-mid);">Klaar voor de volgende stap?</span>
+    <h2 class="cta-headline reveal reveal-delay-1">Jouw innerlijke<br/><em>kracht wacht.</em></h2>
+    <p class="cta-sub reveal reveal-delay-2">Neem vandaag de eerste stap. Plan een gratis kennismakingsgesprek of schrijf je in voor nieuws, tips en inspiratie.</p>
+    <div class="cta-actions reveal reveal-delay-3">
+      <a href="mailto:hallo@kundalinibydemi.nl" class="btn btn--primary" style="padding:18px 40px;font-size:14px;">
+        Boek je gratis gesprek
+        <span class="btn-arrow"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="#kundalini" class="btn btn--outline" style="padding:18px 36px;font-size:14px;">Meer lezen</a>
+    </div>
+    <div class="cta-divider reveal reveal-delay-4">of meld je aan voor inspiratie</div>
+    <div class="email-form reveal reveal-delay-5">
+      <input type="email" class="hero-input" placeholder="jouw@email.nl" />
+      <button class="btn btn--primary" style="white-space:nowrap;padding:14px 28px;">Aanmelden</button>
+    </div>
+    <p class="cta-micro reveal">Geen spam. Alleen waardevolle inhoud. Altijd opzegbaar.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">K<span>undalini</span> · Demi</a>
+        <p class="footer-tagline">Bewust leven begint met één adem. Laat je begeleiden naar wie je werkelijk bent.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Navigatie</p>
+        <ul class="footer-links">
+          <li><a href="#kundalini">Wat is Kundalini?</a></li>
+          <li><a href="#demi">Over Demi</a></li>
+          <li><a href="#transformaties">Transformaties</a></li>
+          <li><a href="#testimonials">Ervaringen</a></li>
+          <li><a href="#aanbod">Aanbod</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="mailto:hallo@kundalinibydemi.nl">hallo@kundalinibydemi.nl</a></li>
+          <li><a href="#cta">Sessie boeken</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Privacy &amp; voorwaarden</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Kundalini by Demi · Alle rechten voorbehouden</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+        <a href="mailto:hallo@kundalinibydemi.nl" aria-label="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─── Scroll reveal ───
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Hero direct zichtbaar
+  setTimeout(() => { document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible')); }, 80);
+
+  // ─── Nav transparant → gescrold ───
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ─── Floating CTA ───
+  const floatCta = document.getElementById('floating-cta');
+  new IntersectionObserver((e) => { e.forEach(en => floatCta.classList.toggle('visible', !en.isIntersecting)); }, { threshold: 0.05 }).observe(document.getElementById('hero'));
+  new IntersectionObserver((e) => { e.forEach(en => { if (en.isIntersecting) floatCta.classList.remove('visible'); }); }, { threshold: 0.25 }).observe(document.getElementById('cta'));
+
+  // ─── Smooth scroll ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // ─── SCROLL-STACK CARDS (mobile sticky) ───
+  (function() {
+    if (window.innerWidth > 768) return;
+
+    const scene  = document.getElementById('stackScene');
+    const track  = document.getElementById('stackTrack');
+    const cards  = Array.from(document.querySelectorAll('.stack-card'));
+    const dots   = Array.from(document.querySelectorAll('.stack-dot'));
+    const n      = cards.length;
+    let   active = -1;
+
+    if (!scene || !track || n === 0) return;
+
+    function setProgress(i) {
+      track.setAttribute('data-progress', `${i + 1} / ${n}`);
+    }
+
+    function goTo(idx) {
+      if (idx === active) return;
+
+      cards.forEach((c, i) => {
+        c.classList.remove('is-active', 'is-exiting', 'is-next');
+        if (i === idx) {
+          // Position just below, then animate up
+          c.classList.add('is-next');
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              c.classList.remove('is-next');
+              c.classList.add('is-active');
+            });
+          });
+        } else if (i === active) {
+          c.classList.add('is-exiting');
+        }
+      });
+
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      setProgress(idx);
+      active = idx;
+    }
+
+    function onScroll() {
+      if (window.innerWidth > 768) return;
+      const rect     = scene.getBoundingClientRect();
+      const sceneTop = -rect.top;
+      const sceneH   = Math.max(1, scene.offsetHeight - window.innerHeight);
+      const progress = Math.max(0, Math.min(1, sceneTop / sceneH));
+
+      let idx;
+      if (sceneTop < 0) idx = -1;
+      else if (sceneTop >= sceneH) idx = n - 1;
+      else idx = Math.min(n - 1, Math.floor(progress * n));
+
+      if (idx >= 0) goTo(idx);
+    }
+
+    // Init first card when section enters viewport
+    const initObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting && active === -1) goTo(0); });
+    }, { threshold: 0.05 });
+    initObs.observe(scene);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Dot clicks → scroll to that card's position
+    dots.forEach((d, i) => {
+      d.addEventListener('click', () => {
+        const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
+        const sceneH   = scene.offsetHeight - window.innerHeight;
+        const targetY  = sceneTop + (i / n) * sceneH + 8;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      });
+    });
+
+    window.addEventListener('resize', () => { if (window.innerWidth <= 768) onScroll(); });
+  })();
+
+  // ─── TESTIMONIAL SWIPER (mobile) ───
+  (function() {
+    const track  = document.getElementById('testimonialTrack');
+    const dots   = Array.from(document.querySelectorAll('.swiper-dot'));
+    const prev   = document.getElementById('swiperPrev');
+    const next   = document.getElementById('swiperNext');
+    const cards  = track ? Array.from(track.querySelectorAll('.testimonial-card')) : [];
+    let current  = 0;
+    let startX   = 0;
+    let dragging = false;
+    let dragOffset = 0;
+
+    function slideTo(idx) {
+      current = Math.max(0, Math.min(cards.length - 1, idx));
+      track.style.transform = `translateX(${-current * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      if (prev) prev.disabled = current === 0;
+      if (next) next.disabled = current === cards.length - 1;
+    }
+
+    if (track && cards.length) {
+      slideTo(0);
+
+      // Prev/Next buttons
+      if (prev) prev.addEventListener('click', () => slideTo(current - 1));
+      if (next) next.addEventListener('click', () => slideTo(current + 1));
+
+      // Dot clicks
+      dots.forEach((d, i) => d.addEventListener('click', () => slideTo(i)));
+
+      // Touch swipe
+      const swiper = document.getElementById('testimonialSwiper');
+      if (swiper) {
+        swiper.addEventListener('touchstart', e => {
+          startX = e.touches[0].clientX;
+          dragging = true;
+          dragOffset = 0;
+        }, { passive: true });
+
+        swiper.addEventListener('touchmove', e => {
+          if (!dragging) return;
+          dragOffset = e.touches[0].clientX - startX;
+          // Live drag feedback
+          track.style.transform = `translateX(calc(${-current * 100}% + ${dragOffset * 0.4}px))`;
+        }, { passive: true });
+
+        swiper.addEventListener('touchend', () => {
+          dragging = false;
+          if (Math.abs(dragOffset) > 50) {
+            slideTo(dragOffset < 0 ? current + 1 : current - 1);
+          } else {
+            slideTo(current); // snap back
+          }
+        });
+      }
+    }
+  })();
+</script>
+</body>
+</html>
